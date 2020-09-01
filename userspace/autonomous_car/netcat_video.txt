@@ -1,0 +1,12 @@
+pi:
+
+raspivid -t 0 -w 1280 -h 720 -hf -ih -fps 20 -o - | nc -k -l 8090
+
+host:
+
+mplayer -fps 200 -demuxer h264es ffmpeg://tcp://192.168.100.17:8090
+
+cross compile:
+
+/home/marcosal/embedded/toolchains/tools/arm-bcm2708/arm-rpi-4.9.3-linux-gnueabihf/bin/arm-linux-gnueabihf-g++ gpio_control.c GpioController.cpp  -o gpio_control
+
